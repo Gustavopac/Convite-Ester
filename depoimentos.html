@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Depoimentos | Festa da Ester</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #dbeafe, #fce7f3);
+      color: #333;
+    }
+
+    .topbar {
+      background: #ff9cc7;
+      color: white;
+      padding: 14px 20px;
+      border-bottom: 4px solid #FF4F9A;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-content {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 55px;
+  width: auto;
+  display: block;
+}
+
+    .menu span {
+      margin-left: 16px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 25px auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+      padding: 0 15px;
+    }
+
+    .profile-card,
+    .box,
+    .post {
+      background: #fff;
+      border: 1px solid #b7c9e2;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+
+    .profile-card {
+      overflow: hidden;
+    }
+
+    .cover {
+      height: 95px;
+      background: linear-gradient(45deg, #FF4F9A, #fbdeeb);
+    }
+
+    .profile-content {
+      padding: 15px;
+      text-align: center;
+      margin-top: -55px;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      border: 5px solid white;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .profile-content h1 {
+      font-size: 24px;
+      color: #FF4F9A;
+      margin-top: 8px;
+    }
+
+    .status {
+      font-size: 13px;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .info {
+      text-align: left;
+      margin-top: 15px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      background: #ff4f9a;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 13px;
+      border-bottom: 3px solid #c72d70;
+    }
+
+    .box {
+      padding: 15px;
+      margin-top: 15px;
+    }
+
+    .box h3 {
+      color: #FF4F9A;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+    }
+
+    .friends {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .friend {
+      text-align: center;
+      font-size: 11px;
+      color: #FF4F9A;
+    }
+
+    .friend img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .main {
+      min-width: 0;
+    }
+
+    .event-header {
+      background: white;
+      border: 1px solid #b7c9e2;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+
+    .event-header h2 {
+      color: #ff4f9a;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .event-header p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .timeline-title {
+      color: #FF4F9A;
+      margin: 15px 0;
+      font-size: 20px;
+    }
+
+    .post {
+      padding: 15px;
+      margin-bottom: 18px;
+    }
+
+    .post-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .post-head img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .post-user {
+      font-weight: bold;
+      color: #FF4F9A;
+      font-size: 14px;
+    }
+
+    .post-date {
+      font-size: 11px;
+      color: #777;
+    }
+
+    .post-text {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .post-img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .actions {
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      color: #FF4F9A;
+      font-weight: bold;
+    }
+
+    .comment-box {
+      background: #f1f5ff;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .map-card {
+      background: #eef4ff;
+      border: 1px dashed #FF4F9A;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    .map-card h3 {
+      color: #FF4F9A;
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #555;
+      padding: 25px;
+    }
+
+
+
+    .btn-secondary {
+      background: #4f8cff;
+      border-bottom-color: #2460bd;
+      margin-left: 6px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .btn-row .btn {
+      margin-top: 0;
+    }
+
+    .form-field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #b7c9e2;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    textarea.form-field {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .depoimento-card {
+      background: #f1f5ff;
+      border: 1px solid #d5e2ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .depoimento-card strong {
+      color: #FF4F9A;
+    }
+
+    .depoimento-date {
+      color: #777;
+      font-size: 11px;
+      margin-top: 6px;
+      display: block;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .event-header h2 {
+        font-size: 22px;
+      }
+      .post-audio {
+      width: 100%;
+      margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <header class="topbar">
+    <div class="topbar-content">
+      <div class="logo">
+        <a href="index.html"><img src="Logo Orkut.png" alt="Orkut" class="logo-img"></a>
+      </div>
+
+      <div class="menu">
+        <span><a href="index.html" style="color:white; text-decoration:none;">Início</a></span>
+        <span>Perfil</span>
+        <span>Recados</span>
+        <span>Fotos</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <aside>
+      <section class="profile-card">
+        <div class="cover"></div>
+        <div class="profile-content">
+          <img class="profile-pic" src="Foto Perfil.jpg" alt="Foto da Ester">
+
+          <h1>Ester</h1>
+          <p class="status">Depoimentos 💌</p>
+
+          <div class="btn-row">
+            <a class="btn" href="index.html">Voltar ao convite</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="box">
+        <h3>Fotos</h3>
+        <div class="friends">
+          <div class="friend"><img src="Foto 1.jpeg"></div>
+          <div class="friend"><img src="Foto 2.jpg"></div>
+          <div class="friend"><img src="Foto 3.jpg"></div>
+          <div class="friend"><img src="Foto 4.png"></div>
+          <div class="friend"><img src="Foto 5.jpeg"></div>
+          <div class="friend"><img src="Foto 6.jpeg"></div>
+        </div>
+      </section>
+    </aside>
+
+    <section class="main">
+
+      <section class="event-header">
+        <h2>Depoimentos para Ester 💌</h2>
+        <p>
+          Deixe aqui seu depoimento para a Tete. Depois de publicado, o depoimento aparece nesta página para todo mundo que acessar o convite.
+        </p>
+      </section>
+
+      <article class="post">
+        <div class="post-head">
+          <img src="Foto Perfil.jpg">
+          <div>
+            <div class="post-user">Novo depoimento</div>
+            <div class="post-date">Escreva com carinho, estilo Orkut</div>
+          </div>
+        </div>
+
+        <input id="nomeDepoimento" class="form-field" maxlength="40" placeholder="Seu nome">
+        <textarea id="textoDepoimento" class="form-field" maxlength="500" placeholder="Escreva seu depoimento para a Ester..."></textarea>
+
+        <button class="btn" id="botaoPublicar">Publicar depoimento</button>
+
+        <div id="mensagemStatus" class="comment-box" style="display:none;"></div>
+      </article>
+
+      <h2 class="timeline-title">Todos os depoimentos</h2>
+
+      <article class="post">
+        <div id="listaDepoimentos">
+          <div class="comment-box">Carregando depoimentos...</div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    Esterkut © Depoimentos da Festa de 24 anos da Ester
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyBoviFtokX5xroO2uRx99ilKU3kKEcmgfU",
+  authDomain: "convite-ester-24.firebaseapp.com",
+  databaseURL: "https://convite-ester-24-default-rtdb.firebaseio.com",
+  projectId: "convite-ester-24",
+  storageBucket: "convite-ester-24.firebasestorage.app",
+  messagingSenderId: "164897420181",
+  appId: "1:164897420181:web:b1b2b1cb9824d962313c9c"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const depoimentosRef = ref(db, "depoimentos");
+
+    const nomeInput = document.getElementById("nomeDepoimento");
+    const textoInput = document.getElementById("textoDepoimento");
+    const botaoPublicar = document.getElementById("botaoPublicar");
+    const listaDepoimentos = document.getElementById("listaDepoimentos");
+    const mensagemStatus = document.getElementById("mensagemStatus");
+
+    function limparTexto(texto) {
+      const div = document.createElement("div");
+      div.textContent = texto;
+      return div.innerHTML;
+    }
+
+    function mostrarMensagem(texto) {
+      mensagemStatus.style.display = "block";
+      mensagemStatus.textContent = texto;
+    }
+
+    botaoPublicar.addEventListener("click", async () => {
+      const nome = nomeInput.value.trim();
+      const texto = textoInput.value.trim();
+
+      if (!nome || !texto) {
+        mostrarMensagem("Preencha seu nome e o depoimento antes de publicar.");
+        return;
+      }
+
+      botaoPublicar.disabled = true;
+      botaoPublicar.textContent = "Publicando...";
+
+      try {
+        await push(depoimentosRef, {
+          nome: nome.substring(0, 40),
+          texto: texto.substring(0, 500),
+          dataTexto: new Date().toLocaleString("pt-BR"),
+          criadoEm: serverTimestamp()
+        });
+
+        nomeInput.value = "";
+        textoInput.value = "";
+        mostrarMensagem("Depoimento publicado com sucesso! 💖");
+      } catch (erro) {
+        mostrarMensagem("Não foi possível publicar. Confira a configuração do Firebase.");
+        console.error(erro);
+      }
+
+      botaoPublicar.disabled = false;
+      botaoPublicar.textContent = "Publicar depoimento";
+    });
+
+    onValue(depoimentosRef, (snapshot) => {
+      const depoimentos = [];
+
+      snapshot.forEach((item) => {
+        depoimentos.push(item.val());
+      });
+
+      listaDepoimentos.innerHTML = "";
+
+      if (depoimentos.length === 0) {
+        listaDepoimentos.innerHTML = '<div class="comment-box">Ainda não tem depoimentos. Seja a primeira pessoa a escrever. 💌</div>';
+        return;
+      }
+
+      depoimentos.reverse().forEach((depoimento) => {
+        const card = document.createElement("div");
+        card.className = "depoimento-card";
+        card.innerHTML = `
+          <strong>${limparTexto(depoimento.nome)} escreveu:</strong><br>
+          ${limparTexto(depoimento.texto).replace(/\n/g, "<br>")}
+          <span class="depoimento-date">${limparTexto(depoimento.dataTexto || "")}</span>
+        `;
+        listaDepoimentos.appendChild(card);
+      });
+    });
+  </script>
+
+</body>
+</html>
